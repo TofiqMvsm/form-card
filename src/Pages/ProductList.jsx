@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,14 +6,39 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ProductAdd from "./ProductAdd";
+import { deleteData } from "../store/addDataSlice";
 
 export default function ProductList() {
+  const [editItem, setEditItem] = useState(null);
   const formData = useSelector((state) => state.data.data);
-  console.log(formData);
+  const dispatch = useDispatch()
+
+  const handleDeleteButtonClick = (id) => {
+    dispatch(deleteData({ id }));
+  };
+
+  const handleEditButtonClick = (item) => {
+    setEditItem(item);
+  };
+  const [showProductAdd, setShowProductAdd] = useState(false);
+
+  const handleAddButtonClick = () => {
+    setShowProductAdd(true);
+  };
+
+  if (editItem) {
+    return <ProductAdd editItem={editItem} />;
+  }
+
+  if (showProductAdd) {
+    return <ProductAdd />;
+  }
+
   return (
     <div className="w-[70%] h-auto p-8 shadow-lg shadow-gray-600 gap-6">
-      <button className="block">Əlavə et</button>
+      <button className="btn" onClick={handleAddButtonClick}>Əlavə et</button>
 
       <div>
         <h1 className="text-lg font-semibold my-6">Siyahı</h1>
@@ -34,16 +59,16 @@ export default function ProductList() {
             
               {formData.map((e) => {
                 return (
-                  <TableBody>
+                  <TableBody key={e.content}>
                     <TableCell className="border">{e.content} </TableCell>
                     <TableCell className="border">{e.date}</TableCell>
                     <TableCell className="border">{e.company}</TableCell>
                     <TableCell className="border">{e.branch}</TableCell>
                     <TableCell className="border">
-                      <button>Dəyiş</button>
+                      <button onClick={() => handleEditButtonClick(e)} className="btn">Dəyiş</button>
                     </TableCell>
                     <TableCell className="border">
-                      <button>Sil</button>
+                      <button  onClick={() => handleDeleteButtonClick(e.id)} className="btn">Sil</button>
                     </TableCell>
                     </TableBody>
                 );

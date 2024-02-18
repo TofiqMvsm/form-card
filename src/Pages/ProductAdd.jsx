@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectTable from '../Componenets/ProjectTable';
 import { useDispatch } from "react-redux";
-import { addData } from "../store/addDataSlice";
-export default function ProductAdd() {
+import { addData,editData } from "../store/addDataSlice";
+
+export default function ProductAdd({editItem}) {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     content: "",
@@ -11,8 +12,13 @@ export default function ProductAdd() {
     date: ""
   });
 
+  useEffect(() => {
+    if (editItem) {
+      setFormData(editItem);
+    }
+  }, [editItem]);
+
   const handleChange = (e) => {
-    
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value
@@ -21,13 +27,22 @@ export default function ProductAdd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addData(formData));
+    if (editItem) {
+      dispatch(editData(formData));
+    } else {
+      dispatch(addData(formData));
+    }
     setFormData({
       content: "",
       company: "",
       branch: "",
       date: ""
     });
+  };
+
+  
+  const isFormEmpty = () => {
+    return Object.values(formData).some(value => value === '');
   };
 
   return (
@@ -91,10 +106,10 @@ export default function ProductAdd() {
         <div>
           <h1 className="font-semibold text-lg mb-4">Əməliyyat</h1>
           <div className="w-full bg-[#f1f1f1] p-4 flex gap-4">
-            <button type="submit" className="w-[150px]">
+            <button type="submit" className="btn w-[150px]" disabled={isFormEmpty()}>
               Yadda saxla
             </button>
-            <button className="w-[150px]">Ləgv et</button>
+            <button className="w-[150px] btn">Ləgv et</button>
           </div>
         </div>
       </form>

@@ -57,13 +57,13 @@ export default function ProjectTable() {
                 <input type="text" className="border rounded-lg p-1"/>
               </TableCell>
               <TableCell className='border'>
-                <button>Əlavə et</button>
+                <button className='btn'>Əlavə et</button>
               </TableCell>
               <TableCell className='border'>
-                <button>Dəyiş</button>
+                <button className='btn'>Dəyiş</button>
               </TableCell>
               <TableCell className='border'>
-                <button>Sil</button>
+                <button className='btn'>Sil</button>
               </TableCell>
             </TableBody>
           </Table>

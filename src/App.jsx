@@ -3,7 +3,7 @@ import  { useState } from "react";
 import Select from "./Componenets/Select";
 import ProductAdd from "./Pages/ProductAdd";
 import ProductList from "./Pages/ProductList";
-const App = ({formData}) => {
+const App = () => {
   const options = [
     "Məhsul Silinmə (Əlavə et/ Dəyiş)",
     "Məhsul Silinmə Siyahısı",
@@ -22,6 +22,8 @@ const App = ({formData}) => {
         return <ProductAdd  />;
       case options[1]:
         return <ProductList />;
+        default:
+          return <ProductAdd  />;
     }
   };
 
