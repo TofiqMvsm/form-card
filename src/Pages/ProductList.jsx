@@ -52,6 +52,11 @@ export default function ProductList() {
                 </TableCell>
                 <TableCell className="border">Şirkət undefined</TableCell>
                 <TableCell className="border">Filial undefined</TableCell>
+                <TableCell className="border">Məhsul undefined</TableCell>
+                <TableCell className="border">Məhsul növü undefined</TableCell>
+                <TableCell className="border">Məhsul vahidi undefined</TableCell>
+                <TableCell className="border">Məhsul miqdarı undefined</TableCell>
+                <TableCell className="border">Qeyd undefined</TableCell>
                 <TableCell className="border">Dəyiş undefined</TableCell>
                 <TableCell className="border">Sil undefined</TableCell>
               </TableRow>
@@ -64,6 +69,11 @@ export default function ProductList() {
                     <TableCell className="border">{e.date}</TableCell>
                     <TableCell className="border">{e.company}</TableCell>
                     <TableCell className="border">{e.branch}</TableCell>
+                    <TableCell className="border">{e.product}</TableCell>
+                <TableCell className="border">{e.kindOfProduct}</TableCell>
+                <TableCell className="border">{e.unit}</TableCell>
+                <TableCell className="border">{e.count}</TableCell>
+                <TableCell className="border">{e.note}</TableCell>
                     <TableCell className="border">
                       <button onClick={() => handleEditButtonClick(e)} className="btn">Dəyiş</button>
                     </TableCell>

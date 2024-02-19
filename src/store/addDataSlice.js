@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { v4 as uuidv4 } from 'uuid';
 const initialState = {
   data: [],
 };
@@ -8,8 +8,9 @@ export const addDataSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    addData: (state, action) => {w
-      state.data.push(action.payload);
+    addData: (state, action) => {
+      const newData = { ...action.payload, id: uuidv4() }; 
+      state.data.push(newData);
     },
     editData: (state, action) => {
       const index = state.data.findIndex(
